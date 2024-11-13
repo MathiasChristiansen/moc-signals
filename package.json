@@ -1,6 +1,6 @@
 {
   "name": "moc-signals",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A signaling library for vanilla js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

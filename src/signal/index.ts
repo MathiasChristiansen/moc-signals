@@ -1,4 +1,4 @@
-class Signal<T> {
+export class Signal<T> {
   public constructor(
     private _value: T,
     private observers: ((value: T) => void)[] = []
@@ -15,7 +15,25 @@ class Signal<T> {
   }
 
   // Set the signal value, either directly or using a function
-  public async set(newValueOrUpdater: T | ((prevValue: T) => T)): Promise<T> {
+  public set(newValueOrUpdater: T | ((prevValue: T) => T)): T {
+    if (typeof newValueOrUpdater === "function") {
+      // If a function is passed, call it with the current value (prevState)
+      this._value = (newValueOrUpdater as (prevValue: T) => T)(this._value);
+    } else {
+      // Otherwise, treat it as a new value and set it directly
+      this._value = newValueOrUpdater;
+    }
+
+    // Notify all observers of the new value
+    this.observers.forEach((observer) => observer(this.value));
+
+    return this._value;
+  }
+
+  // Set the signal value, either directly or using a function
+  public async setAsync(
+    newValueOrUpdater: T | ((prevValue: T) => T)
+  ): Promise<T> {
     if (typeof newValueOrUpdater === "function") {
       // If a function is passed, call it with the current value (prevState)
       this._value = (newValueOrUpdater as (prevValue: T) => T)(this._value);
