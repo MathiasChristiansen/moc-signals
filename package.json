@@ -1,6 +1,6 @@
 {
   "name": "moc-signals",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A signaling library for vanilla js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,7 +9,10 @@
     "build": "tsc",
     "prepublishOnly": "npm run build"
   },
-  "keywords": ["signals", "observer"],
+  "keywords": [
+    "signals",
+    "observer"
+  ],
   "license": "MIT",
   "author": "Mathias Ólavsson Christiansen",
   "devDependencies": {
